@@ -1,0 +1,32 @@
+
+<div id="showroom_list" >
+<h2>Welcome <%=h current_user.username %> Your showroom : </h2>
+  <table>
+<% @show_rooms.each do |show_room| %>
+
+<tr class=" <%= cycle('list_line_odd' , 'list_line_even' ) %>" >
+  <td class="list_image">
+    <%= image_tag show_room.pic(:medium) %>
+  </td>
+
+<td class="list_description" >
+    <dl>
+        <dt><%= show_room.title %></dt>
+        <dd><%= truncate(strip_tags(show_room.description),:length => 80) %></dd>
+        <dt><%= show_room.price %></dt>
+    </dl>
+</td>
+
+<td class="list_actions" >
+        <%= link_to 'Show' , show_room %><br/>
+        <%= link_to 'Edit ' , edit_show_room_path(show_room) %><br/>
+        <%= link_to 'Destroy' , show_room, :confirm => 'Are you sure? ' , :method => :delete %>
+    </td>
+</tr>
+
+<% end %>
+</table>
+</div>
+<br />
+<%= link_to 'New Item' , new_show_room_path %>
+

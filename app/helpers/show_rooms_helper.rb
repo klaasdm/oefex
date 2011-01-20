@@ -1,0 +1,16 @@
+module ShowRoomsHelper
+  def rating_ballot
+    if @rating = current_user.ratings.find_by_show_room_id(params[:id])
+        @rating
+    else
+        current_user.ratings.new
+    end
+  end
+  def current_user_rating
+    if @rating = current_user.ratings.find_by_show_room_id(params[:id])
+        @rating.value
+    else
+        "This is not Rated yet, be the first one"
+    end
+end
+end

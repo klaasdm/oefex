@@ -1,0 +1,28 @@
+<% if notice %>
+<p id=" notice" ><%= notice %></p>
+<% end %>
+
+
+
+<h2>Welcome <%=h current_user.username %> this is the public showroom : </h2>
+
+
+<% @show_rooms.each do |show_room| %>
+    
+<div class="entry" >
+    <%= image_tag show_room.pic(:medium) %>
+
+  
+  <h3><%= show_room.title %> gemaakt door <%= show_room.user.username %></h3>
+    <%=sanitize show_room.description %>
+  <div class="price_line" >
+    <span class="price" ><%= number_to_currency(show_room.price) %></span>
+    <%= link_to 'Show' , show_room %><br/>
+    <%= button_to 'Add to Cart' , line_items_path(:show_room_id => show_room), :remote => true %>
+  
+  </div>
+
+
+</div>
+
+<% end %>
